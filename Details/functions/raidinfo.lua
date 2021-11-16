@@ -1,7 +1,7 @@
 local LBB = LibStub("LibBabble-Boss-3.0"):GetLookupTable()
 local LBZ = LibStub("LibBabble-Zone-3.0"):GetLookupTable()
 
--- BK
+-- TBC Expansion
 
 do --> data for Zul'Aman
 	local INSTANCE_MAPID = 867
@@ -412,7 +412,7 @@ do --> data for The Eye
 	})
 end
 
--- WotLK
+-- WotLK Expansion
 
 do --> data for Onyxia's Lair
 	local INSTANCE_MAPID = 14
