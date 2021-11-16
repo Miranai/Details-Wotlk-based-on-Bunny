@@ -74,6 +74,90 @@ do --> data for Zul'Aman
 	})
 end
 
+do --> data for Black Temple
+	local INSTANCE_MAPID = 564
+	local HDIMAGESPATH = "Details\\images\\raid"
+	local HDFILEPREFIX = "BlackTemple"
+	local LOADINGSCREEN_FILE, LOADINGSCREEN_COORDS = "LOADSCREENBLACKTEMPLE", {0, 1, 285/1024, 875/1024}
+	local EJ_DUNGEONBG = "ui-ej-dungeonbutton-blacktemple"
+	local EJ_LOREBG = "ui-ej-lorebg-blacktemple"
+
+	local PORTRAIT_LIST = {
+		"ui-ej-boss-high warlord naj'entus",
+		"ui-ej-boss-supremus",
+		"ui-ej-boss-shade of akama",
+		"ui-ej-boss-teron gorefiend",
+		"ui-ej-boss-gurtogg bloodboil",
+		"ui-ej-boss-reliquary of souls",
+		"ui-ej-boss-mother shahraz",
+		"ui-ej-boss-the illidari council",
+		"ui-ej-boss-illidan stormrage",
+	}
+
+	local ENCOUNTER_ID_CL = {
+		22887, 22898, 22841, 22871, 22948, 23418, 22947, 23426, 22917,
+		[22887] = 1, --High Warlord Naj'entus
+		[22898] = 2, --Supremus
+		[22841] = 3, --Shade of Akama
+		[22871] = 4, --Teron Gorefiend
+		[22948] = 5, --Gurtogg Bloodboil
+		[23418] = 6, --Reliquary of Souls
+		[22947] = 7, --Mother Shahraz
+		[23426] = 8, --The Illidari Council
+		[22917] = 9, --Illidan Stormrage
+	}
+
+	--> install the raid
+	local BOSSNAMES = {
+		LBB["High Warlord Naj'entus"],
+		LBB["Supremus"],
+		LBB["Shade of Akama"],
+		LBB["Teron Gorefiend"],
+		LBB["Gurtogg Bloodboil"],
+		LBB["Reliquary of Souls"],
+		LBB["Mother Shahraz"],
+		LBB["The Illidari Council"],
+		LBB["Illidan Stormrage"],
+	}
+
+	local ENCOUNTERS = {}
+
+	for i = 1, #PORTRAIT_LIST do
+		local encounterTable = {
+			boss = BOSSNAMES[i],
+			portrait = "Interface\\EncounterJournal\\"..PORTRAIT_LIST[i],
+		}
+		tinsert(ENCOUNTERS, encounterTable)
+	end
+
+	_detalhes:InstallEncounter({
+		id = INSTANCE_MAPID, --map id
+		name = LBZ["Black Temple"],
+		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
+		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
+		is_raid = true,
+		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
+		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
+
+		encounter_ids2 = ENCOUNTER_ID_CL,
+		boss_names = BOSSNAMES,
+		encounters = ENCOUNTERS,
+
+		boss_ids = {
+			[22887] = 1, --High Warlord Naj'entus
+			[22898] = 2, --Supremus
+			[22841] = 3, --Shade of Akama
+			[22871] = 4, --Teron Gorefiend
+			[22948] = 5, --Gurtogg Bloodboil
+			[23418] = 6, --Reliquary of Souls
+			[22947] = 7, --Mother Shahraz
+			[23426] = 8, --The Illidari Council
+			[22917] = 9, --Illidan Stormrage
+			
+		},
+	})
+end
+
 do --> data for Serpentshrine Cavern
 	local INSTANCE_MAPID = 863
 	local HDIMAGESPATH = "Details\\images\\raid"
