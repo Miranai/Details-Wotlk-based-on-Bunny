@@ -3,6 +3,73 @@ local LBZ = LibStub("LibBabble-Zone-3.0"):GetLookupTable()
 
 -- TBC Expansion
 
+do --> data for Sunwell Plateau
+	local INSTANCE_MAPID = 580
+	local HDIMAGESPATH = "Details\\images\\raid"
+	local HDFILEPREFIX = "SunwellPlateaud"
+	local LOADINGSCREEN_FILE, LOADINGSCREEN_COORDS = "LOADSCREENSUNWELLPLATEAU", {0, 1, 285/1024, 875/1024}
+	local EJ_DUNGEONBG = "ui-ej-dungeonbutton-sunwellplateau"
+	local EJ_LOREBG = "ui-ej-lorebg-sunwellplateau"
+
+	local PORTRAIT_LIST = {
+		"ui-ej-boss-brutallus",
+		"ui-ej-boss-felmyst",
+		"ui-ej-boss-kil'jaeden",
+	
+	}
+
+	local ENCOUNTER_ID_CL = {
+		24882, 25038, 25315,
+		[24882] = 1, --Brutallus
+		[25038] = 2, --Felmyst
+		[25315] = 3, --Kil'jaeden
+		
+
+	--> install the raid
+	local BOSSNAMES = {
+		LBB["Brutallus"],
+		LBB["Supremus"],
+		LBB["Kil'jaeden"],
+		LBB["Teron Gorefiend"],
+		LBB["Gurtogg Bloodboil"],
+		LBB["Reliquary of Souls"],
+		LBB["Mother Shahraz"],
+		LBB["The Illidari Council"],
+		LBB["Illidan Stormrage"],
+	}
+
+	local ENCOUNTERS = {}
+
+	for i = 1, #PORTRAIT_LIST do
+		local encounterTable = {
+			boss = BOSSNAMES[i],
+			portrait = "Interface\\EncounterJournal\\"..PORTRAIT_LIST[i],
+		}
+		tinsert(ENCOUNTERS, encounterTable)
+	end
+
+	_detalhes:InstallEncounter({
+		id = INSTANCE_MAPID, --map id
+		name = LBZ["Black Temple"],
+		icons = "Interface\\AddOns\\"..HDIMAGESPATH.."\\"..HDFILEPREFIX.."_BossFaces",
+		icon = "Interface\\EncounterJournal\\"..EJ_DUNGEONBG,
+		is_raid = true,
+		backgroundFile = {file = "Interface\\Glues\\LOADINGSCREENS\\"..LOADINGSCREEN_FILE, coords = LOADINGSCREEN_COORDS},
+		backgroundEJ = "Interface\\EncounterJournal\\"..EJ_LOREBG,
+
+		encounter_ids2 = ENCOUNTER_ID_CL,
+		boss_names = BOSSNAMES,
+		encounters = ENCOUNTERS,
+
+		boss_ids = {
+			[24882] = 1, --Brutallus
+			[25038] = 2, --Felmyst
+			[25315] = 3, --Kil'jaeden
+						
+		},
+	})
+end
+
 do --> data for Zul'Aman
 	local INSTANCE_MAPID = 867
 	local HDIMAGESPATH = "Details\\images\\raid"
@@ -157,7 +224,7 @@ do --> data for Black Temple
 		},
 	})
 end
-------------------------------------------------------
+
 do --> data for Hyjal Summit
 	local INSTANCE_MAPID = 3606
 	local HDIMAGESPATH = "Details\\images\\raid"
@@ -228,7 +295,7 @@ do --> data for Hyjal Summit
 		},
 	})
 end
----------------------------------------------------------------
+
 do --> data for Serpentshrine Cavern
 	local INSTANCE_MAPID = 863
 	local HDIMAGESPATH = "Details\\images\\raid"
